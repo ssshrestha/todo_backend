@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="UserAuthenticationService" />
+        <module name="Register" />
+        <module name="Gateway" />
+        <module name="EurekaService" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="Capstone project" target="1.7" />
+      <module name="EurekaService" target="1.7" />
+      <module name="Gateway" target="8" />
+      <module name="Register" target="1.7" />
+      <module name="UserAuthenticationService" target="1.7" />
+      <module name="UserMovieService" target="8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="EurekaService" options="-parameters" />
+      <module name="Gateway" options="-parameters" />
+      <module name="Register" options="-parameters" />
+      <module name="UserAuthenticationService" options="-parameters" />
+      <module name="UserMovieService" options="-parameters" />
+    </option>
+  </component>
+</project>

@@ -1,0 +1,69 @@
+version: '3.3'
+services:
+
+  eurekaservice:
+    container_name: eureka-service
+    build: EurekaService/
+    hostname: localhost
+    restart: always
+    network_mode: host
+    ports:
+      - 8761:8761
+
+  userauthenticaticationservice:
+   container_name: user-authentication-service
+   build: UserAuthenticationService/
+   hostname: localhost
+   restart: always
+   network_mode: host
+   depends_on:
+    - mysqlservice
+    - gatewayservice
+    - eurekaservice
+   ports:
+      - 8082:8082
+
+  usermovieservice:
+    container_name: user-movie-service
+    build: UserMovieService/
+    hostname: localhost
+    restart: always
+    network_mode: host
+    depends_on:
+      - mongodbservice
+      - gatewayservice
+      - eurekaservice
+    ports:
+      - 8085:8085
+
+  gatewayservice:
+    container_name: gateway-service
+    build: Gateway
+    hostname: localhost
+    restart: always
+    network_mode: host
+    depends_on:
+      - eurekaservice
+    ports:
+      - 9000:9000
+
+  mongodbservice:
+    image: mongo:latest
+    ports:
+    - 27017:27017
+    container_name: mongo-container
+    network_mode: host
+    hostname: localhost
+
+  mysqlservice:
+    image: mysql:5.5
+    ports:
+      - 3306:3306
+    container_name: mysql-container
+    network_mode: host
+    hostname: localhost
+    environment:
+      MYSQL_ROOT_PASSWORD : root
+      MYSQL_USERNAME: root
+      MYSQL_PASSWORD: root
+      MYSQL_ALLOW_EMPTY_PASSWORD: "YES"

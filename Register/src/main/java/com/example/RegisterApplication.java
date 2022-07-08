@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 @EnableFeignClients
 @Configuration
 public class RegisterApplication {
-	//vimit
+	//vimit vimit 2
 
 	public static void main(String[] args) {
 		SpringApplication.run(RegisterApplication.class, args);

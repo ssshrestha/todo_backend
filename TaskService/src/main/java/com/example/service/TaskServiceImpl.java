@@ -1,59 +1,102 @@
 package com.example.service;
 
 import com.example.exception.UserAlreadyExistException;
+import com.example.exception.UserNotFoundException;
+import com.example.model.Task;
 import com.example.model.User;
-import com.example.proxy.UserProxy;
-import com.example.repo.RegisterRepo;
+import com.example.repo.TaskRepo;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
+//import java.util.Optional;
+
 @Service
-public class TaskServiceImpl implements RegisterService{
+public class TaskServiceImpl implements TaskService{
 
 
      @Autowired
-     RegisterService registerService;
+    TaskService taskService;
      @Autowired
-     RegisterRepo registerRepo;
-     @Autowired
-     UserProxy userProxy;
+    TaskRepo taskRepo;
 
 
-
-
-
-        @Override
-        public User registerUser(User user)   throws UserAlreadyExistException {
-            System.out.println("In user service impl register user function");
-            User user1 = registerRepo.findByEmail(user.getEmail());
-
-            if(user1!=null)
-            {System.out.println("user already exist");
-                throw new UserAlreadyExistException();}
-            List<User> userList = registerRepo.findAll();
-//            User user2 = userList.get(userList.size()-1);
-//            System.out.println("last user is : "+user2);
-//            user.setUserId(user2.getUserId()+1);
-            System.out.println("before reg in sql");
-            ResponseEntity r = userProxy.registerUser(user);
-            System.out.println("after reg in sql");
-            System.out.println(r);
-            System.out.println(r.getBody());
-            return registerRepo.save(user);}
-
-
-
-        @Override
-        public User updateUser(String email,User user){
-            User user1 = registerRepo.findByEmail(email);
-            List<User> userList = registerRepo.findAll();
-            User user2 = userList.get(userList.size()-1);
-            System.out.println("last user is : "+user2);
-            user1.setUsername(user.getUsername());
-            user1.setUserImage(user.getUserImage());
-            user1.setMobileNo(user.getMobileNo());
-            return registerRepo.save(user1);
+    @Override
+    public User addTask(String email,Task task) {
+        User user = taskRepo.findByEmail(email);
+        if(user!=null){
+            if(user.getTaskList()==null){
+                user.setTaskList(Arrays.asList(task));
+            }
+            else {
+                List<Task> taskList = user.getTaskList();
+                taskList.add(task);
+                user.setTaskList(taskList);
+            }
+            return taskRepo.save(user);
         }
+        return user ;
+    }
+
+    @Override
+    public User updateTask(String email, int taskId,Task task) throws UserNotFoundException {
+        User user = taskRepo.findByEmail(email);
+         Task t =null;
+        if(user==null){
+            throw new UserNotFoundException();
+        } else{
+            for(Task task1:user.getTaskList()){
+                if(task1.getTaskId()==taskId){
+                    t=task1;
+            System.out.println(taskId);
+            System.out.println(task1);
+                task1.setTaskTitle(task.getTaskTitle());
+                task1.setTaskDescription(task.getTaskDescription());
+                task1.setCategory(task.getCategory());
+                task1.setDate(task.getDate());
+                task1.setPriority(task.getPriority());
+                }
+            }
+             if(t==null) {System.out.println("Task not found");}
+            }
+       return taskRepo.save(user);
+    }
+
+    @Override
+    public User deleteTask(String email, int taskId) throws UserNotFoundException {
+        User user = taskRepo.findByEmail(email);
+        boolean taskIdIsPresent=false;
+        if(user==null){
+            throw new UserNotFoundException();
+        } else {
+            List<Task> tasks = user.getTaskList();
+            taskIdIsPresent = tasks.removeIf(x->x.getTaskId()==(taskId));
+            if(!taskIdIsPresent)
+            {
+//                throw new TaskNotFoundException();
+                System.out.println("Task not found");
+            }
+            user.setTaskList(tasks);
+        }
+        return taskRepo.save(user);
+    }
+
+    @Override
+    public List<Task> showUserTask(String email) throws UserNotFoundException {
+
+        User user = taskRepo.findByEmail(email);
+        if(user==null){
+            throw new UserNotFoundException();
+        }
+            return user.getTaskList();
+    }
+
+
+
+
+
 }

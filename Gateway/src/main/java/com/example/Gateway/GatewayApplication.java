@@ -25,11 +25,13 @@ public class GatewayApplication {
 		 public RouteLocator myRoutes (RouteLocatorBuilder builder){
 			 return builder.routes()//http://localhost:9000/api/v1/, http://localhost:9000/api/v2/
 				 .route(p -> p.path("/api/v1/**" )
-
 						 .uri("lb://USER-AUTHENTICATION-SERVICE"))
-		         .route(p -> p.path("/api/v2/**" )
 
+		         .route(p -> p.path("/api/v2/**" )
 						 .uri("lb://REGISTER"))
+
+					 .route(p -> p.path("/api/v3/**" )
+							 .uri("lb://TASK-SERVICE"))
 		         .build();
 		 }
 

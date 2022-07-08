@@ -1,11 +1,11 @@
 server:
-  port: 8086
+  port: 8085
 spring:
   data:
     mongodb:
       uri: mongodb://localhost:27017/registerdb
   application:
-    name: register
+    name: task-service
 eureka:
   client:
     registerWithEureka: true

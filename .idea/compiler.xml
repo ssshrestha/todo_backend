@@ -8,14 +8,10 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="UserAuthenticationService" />
-        <module name="Gateway" />
-        <module name="EurekaService" />
-      </profile>
-      <profile name="Annotation profile for MovieApplication" enabled="true">
-        <sourceOutputDir name="../TaskService/target/generated-sources/annotations" />
-        <sourceTestOutputDir name="../TaskService/target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
         <module name="Register" />
+        <module name="Gateway" />
+        <module name="TaskService" />
+        <module name="EurekaService" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -24,6 +20,7 @@
       <module name="Gateway" target="8" />
       <module name="Register" target="1.7" />
       <module name="Register (1)" target="1.7" />
+      <module name="TaskService" target="8" />
       <module name="UserAuthenticationService" target="1.7" />
       <module name="UserMovieService" target="8" />
     </bytecodeTargetLevel>
@@ -34,6 +31,7 @@
       <module name="Gateway" options="-parameters" />
       <module name="Register" options="-parameters" />
       <module name="Register (1)" options="-parameters" />
+      <module name="TaskService" options="-parameters" />
       <module name="UserAuthenticationService" options="-parameters" />
       <module name="UserMovieService" options="-parameters" />
     </option>

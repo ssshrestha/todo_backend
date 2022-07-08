@@ -14,7 +14,7 @@ public class TaskApplication {
 	//vimit vimit 2
 
 	public static void main(String[] args) {
-		SpringApplication.run(RegisterApplication.class, args);
+		SpringApplication.run(TaskApplication.class, args);
 	}
 
 }

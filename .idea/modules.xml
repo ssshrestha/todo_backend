@@ -7,6 +7,7 @@
       <module fileurl="file://$PROJECT_DIR$/Gateway/Gateway.iml" filepath="$PROJECT_DIR$/Gateway/Gateway.iml" />
       <module fileurl="file://$PROJECT_DIR$/Register/Register.iml" filepath="$PROJECT_DIR$/Register/Register.iml" />
       <module fileurl="file://$PROJECT_DIR$/TaskService/Register (1).iml" filepath="$PROJECT_DIR$/TaskService/Register (1).iml" />
+      <module fileurl="file://$PROJECT_DIR$/TaskService/TaskService.iml" filepath="$PROJECT_DIR$/TaskService/TaskService.iml" />
       <module fileurl="file://$PROJECT_DIR$/UserAuthenticationService/UserAuthenticationService.iml" filepath="$PROJECT_DIR$/UserAuthenticationService/UserAuthenticationService.iml" />
     </modules>
   </component>

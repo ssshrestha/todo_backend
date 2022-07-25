@@ -3,7 +3,7 @@ server:
 spring:
   data:
     mongodb:
-      uri: mongodb://localhost:27017/registerdb
+      uri: mongodb://localhost:27017/todoregisterdb
   application:
     name: task-service
 eureka:

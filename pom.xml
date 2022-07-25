@@ -41,6 +41,8 @@
     <module>Gateway</module>
     <module>EurekaService</module>
     <module>TaskService</module>
+    <module>ArchiveService</module>
+    <module>OrganizationService</module>
   </modules>
 
   <build>

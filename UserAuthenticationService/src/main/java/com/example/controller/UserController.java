@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
-@CrossOrigin(origins="*")
+
 @RequestMapping("/api/v1")
 @RestController
 public class UserController {
@@ -32,13 +32,13 @@ public class UserController {
 
 
     @PostMapping("/login")
-    @HystrixCommand(fallbackMethod = "fallbackLogin")
-    @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds",value = "3000")
+//    @HystrixCommand(fallbackMethod = "fallbackLogin")
+//    @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds",value = "3000")
     public ResponseEntity<?> credentialCheck(@RequestBody User user)throws UserNotFoundException{
         ResponseEntity responseEntity;
         try
         {
-            Thread.sleep(100);
+//            Thread.sleep(100);
             User userObj=userService.findByEmailAndPasswordCheck(user.getEmail(),user.getPassword());
 
             if(userObj.getEmail().equals(user.getEmail()))
@@ -61,11 +61,11 @@ public class UserController {
         return responseEntity;
     }
 
-    public ResponseEntity<?> fallbackLogin(@RequestBody User user)
-        throws InvalidCredentialsException{
-        String msg = "login failed";
-        return  new ResponseEntity<>(msg,HttpStatus.BAD_REQUEST);
-    }
+//    public ResponseEntity<?> fallbackLogin(@RequestBody User user)
+//        throws InvalidCredentialsException{
+//        String msg = "login failed";
+//        return  new ResponseEntity<>(msg,HttpStatus.BAD_REQUEST);
+//    }
 
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody User user){
@@ -73,11 +73,14 @@ public class UserController {
         return new ResponseEntity<>("User Created",HttpStatus.CREATED);
     }
 
-    @PostMapping("/updatePassword/{email}/{password}")
-    public User updatePasswordByEmailCheck( @PathVariable ("password") String password,@PathVariable ("email") String email) throws UserNotFoundException{
-//        User newUser=userService.registerUser(user);
-        return userService.updatePasswordByEmailCheck(email,password);
+    @PutMapping("/updatePassword/{email}/{password}/{pass}")
+    public ResponseEntity<?> updatePasswordByEmailCheck(@RequestBody(required = false) @PathVariable ("password") String password,@PathVariable ("pass") String password2,@PathVariable ("email") String email) throws UserNotFoundException{
+        ResponseEntity responseEntity;
+        responseEntity=new ResponseEntity<>(userService.updatePasswordByEmailCheck(email,password,password2), HttpStatus.OK);
+//        userService.updatePasswordByEmailCheck(email,password,password2);
+        return  responseEntity;
     }
+
 
     @PostMapping("/cancel/{id}")
     public List<User> cancelRegistration(@PathVariable("id") int userid) {

@@ -2,9 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/ArchiveService/ArchiveService.iml" filepath="$PROJECT_DIR$/ArchiveService/ArchiveService.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/Capstone project.iml" filepath="$PROJECT_DIR$/.idea/Capstone project.iml" />
       <module fileurl="file://$PROJECT_DIR$/EurekaService/EurekaService.iml" filepath="$PROJECT_DIR$/EurekaService/EurekaService.iml" />
       <module fileurl="file://$PROJECT_DIR$/Gateway/Gateway.iml" filepath="$PROJECT_DIR$/Gateway/Gateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/OrganizationService/OrganizationService.iml" filepath="$PROJECT_DIR$/OrganizationService/OrganizationService.iml" />
       <module fileurl="file://$PROJECT_DIR$/Register/Register.iml" filepath="$PROJECT_DIR$/Register/Register.iml" />
       <module fileurl="file://$PROJECT_DIR$/TaskService/Register (1).iml" filepath="$PROJECT_DIR$/TaskService/Register (1).iml" />
       <module fileurl="file://$PROJECT_DIR$/TaskService/TaskService.iml" filepath="$PROJECT_DIR$/TaskService/TaskService.iml" />

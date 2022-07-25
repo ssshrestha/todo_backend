@@ -11,10 +11,7 @@ import org.springframework.context.annotation.Configuration;
 @EnableFeignClients
 @Configuration
 public class TaskApplication {
-	//vimit vimit 2
-
 	public static void main(String[] args) {
 		SpringApplication.run(TaskApplication.class, args);
 	}
-
 }

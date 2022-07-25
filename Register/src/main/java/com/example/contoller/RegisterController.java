@@ -1,6 +1,8 @@
 
     package com.example.contoller;
 
+import com.example.exception.UserAlreadyExistException;
+import com.example.model.Task;
 import com.example.model.User;
 import com.example.repo.RegisterRepo;
 import com.example.service.RegisterService;
@@ -9,7 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-    @CrossOrigin(origins="*")
     @RestController
     @RequestMapping("/api/v2")
     public class RegisterController {
@@ -59,7 +60,20 @@ import org.springframework.web.bind.annotation.*;
             return responseEntity;
         }
 
+    @PostMapping("/setUserImage/{email}")
+    public ResponseEntity<?> setUserImage(@RequestBody String image,@PathVariable ("email") String email) {
+      return responseEntity = new ResponseEntity<>(registerService.setImage(email,image), HttpStatus.OK);
+    }
 
+        @PostMapping("/addTask/{email}")
+        public ResponseEntity addTask(@RequestBody Task task, @PathVariable ("email") String email){
+            return new ResponseEntity<>(registerService.addTask(email,task),HttpStatus.CREATED);
+        }
+
+        @GetMapping("/findUser/{email}")
+        public ResponseEntity findUser( @PathVariable ("email") String email) throws UserAlreadyExistException {
+            return new ResponseEntity<>(registerService.getUser(email),HttpStatus.CREATED);
+        }
 
     }
 

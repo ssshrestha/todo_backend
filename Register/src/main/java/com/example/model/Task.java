@@ -17,7 +17,9 @@ public class Task {
     int taskId;
     String taskTitle;
     String taskDescription;
+    String taskImage;
     String category;
     Date date;
     String priority;
+    String taskCardColor;
 }

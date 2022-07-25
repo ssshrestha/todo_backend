@@ -5,14 +5,17 @@ spring:
   name: api-gateway-service
  main:
   web-application-type: reactive
+ cloud:
+  gateway:
+   globalcors:
+    corsConfigurations:
+     '[/**]':
+      allowedOrigins: "*"
+      allowedMethods: "*"
+      allowedHeaders: "*"
 eureka:
  client:
+  serverUrl:
+  defaultZone: http://localhost:8761
+  fetchRegistry: true
   registerWithEureka: true
-cloud:
- gateway:
-  globalcors:
-   corsConfigurations:
-    '[/**]':
-     allowedOrigins: "*"
-     allowedMethods: "*"
-     allowedHeaders: "*"

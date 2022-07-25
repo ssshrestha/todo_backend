@@ -35,13 +35,23 @@ public class UserService {
         return avaiablability;
         }
 
-        public User updatePasswordByEmailCheck(String email,String password)throws UserNotFoundException
+    public boolean updatePasswordByEmailCheck(String email,String pass,String password)throws UserNotFoundException
     {User user=userRepository.findByEmail(email);
+        boolean status=false;
         if(user==null){
             throw new UserNotFoundException();
-        } else {user.setPassword(password);
-        }return userRepository.save(user);
+        } else {
+            System.out.println("inside else");
+            if(user.getPassword().equalsIgnoreCase(pass)) {
+                user.setPassword(password);
+                status=true;
+            }
+        } userRepository.save(user);
+        System.out.println("status is : "+status);
+        return status;
     }
+
+
 
     public List<User> getAllUsers(){
         return userRepository.findAll();

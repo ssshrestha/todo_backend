@@ -8,7 +8,6 @@
     </option>
     <option name="ignoredFiles">
       <set>
-        <option value="$PROJECT_DIR$/TaskService/pom.xml" />
         <option value="$PROJECT_DIR$/UserMovieService/pom.xml" />
       </set>
     </option>

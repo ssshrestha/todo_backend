@@ -7,28 +7,34 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="UserAuthenticationService" />
+        <module name="OrganizationService" />
+        <module name="ArchiveService" />
         <module name="Register" />
         <module name="Gateway" />
         <module name="TaskService" />
         <module name="EurekaService" />
+        <module name="UserAuthenticationService" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="ArchiveService" target="1.8" />
       <module name="Capstone project" target="1.7" />
       <module name="EurekaService" target="1.7" />
-      <module name="Gateway" target="8" />
+      <module name="Gateway" target="1.8" />
+      <module name="OrganizationService" target="1.8" />
       <module name="Register" target="1.7" />
       <module name="Register (1)" target="1.7" />
-      <module name="TaskService" target="8" />
+      <module name="TaskService" target="1.8" />
       <module name="UserAuthenticationService" target="1.7" />
       <module name="UserMovieService" target="8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="ArchiveService" options="-parameters" />
       <module name="EurekaService" options="-parameters" />
       <module name="Gateway" options="-parameters" />
+      <module name="OrganizationService" options="-parameters" />
       <module name="Register" options="-parameters" />
       <module name="Register (1)" options="-parameters" />
       <module name="TaskService" options="-parameters" />

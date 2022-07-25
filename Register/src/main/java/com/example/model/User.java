@@ -16,9 +16,9 @@ import java.util.List;
 public class User {
     @Id
 //    private int userId;
-    private String email;
-    private String username;
-    private String userImage;
+     String email;
+     String username;
+     String userImage;
     private String mobileNo;
     @Transient
     private String password;

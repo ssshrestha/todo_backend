@@ -13,9 +13,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.*;
 
 @EnableEurekaClient
-@CrossOrigin(origins="*")
 @SpringBootApplication
- @Configuration
+@Configuration
 public class GatewayApplication {
 
 	 public static void main(String[] args) {
@@ -32,6 +31,12 @@ public class GatewayApplication {
 
 					 .route(p -> p.path("/api/v3/**" )
 							 .uri("lb://TASK-SERVICE"))
+
+					 .route(p -> p.path("/api/v4/**" )
+							 .uri("lb://ARCHIVE-SERVICE"))
+
+					 .route(p -> p.path("/api/v5/**" )
+							 .uri("lb://ORGANIZATION-SERVICE"))
 		         .build();
 		 }
 

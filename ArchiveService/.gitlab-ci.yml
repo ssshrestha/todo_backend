@@ -1,0 +1,25 @@
+  image: 'maven:latest'
+
+  stages:
+    - test
+    - build
+
+  services:
+    - 'mongo:3.4-jessie'
+
+  variables:
+    MONGO_DATABASENAME: "todoregisterdb"
+    MONGO_URL: "mongodb://mongo/todoregisterdb"
+
+  cache:
+    paths:
+      - .m2/repository
+      - target
+  maven-test:
+    stage: test
+    script: "mvn test"
+    tags:
+      - MYREPOS_PROD_RUNNER
+    artifacts:
+      paths:
+        - target/*.jar

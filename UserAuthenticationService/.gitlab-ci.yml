@@ -1,0 +1,26 @@
+  image: 'maven:latest'
+
+  stages:
+    - test
+    - build
+
+  services:
+    - 'MySQL8Dialect'
+
+  variables:
+    MYSQL_DATABASENAME: "todoregisterauthdb"
+    MYSQL_ROOT_PASSWORD: "root"
+    SQL_URL: "sqldb://sql/todoregisterauthdb"
+
+  cache:
+    paths:
+      - .m2/repository
+      - target
+  maven-test:
+    stage: test
+    script: "mvn test"
+    tags:
+      - MYREPOS_PROD_RUNNER
+    artifacts:
+      paths:
+        - target/*.jar

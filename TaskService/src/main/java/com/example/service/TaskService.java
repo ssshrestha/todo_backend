@@ -20,7 +20,7 @@ public interface TaskService {
     User setTaskCategory(String email,int taskId,String category) throws UserNotFoundException;
     User setTaskPriority(String email,int taskId,String priority) throws UserNotFoundException;
     User moveTaskToArchive(String email,int taskId) throws UserNotFoundException;
-    User moveTaskCompletedToArchive(String email) throws UserNotFoundException;
+    List<Task> moveTaskCompletedToArchive(String email) throws UserNotFoundException;
     List<Task> showUserTask(String email) throws UserNotFoundException;
 
     User setTaskCardColor(String email , int taskId ,String taskCardColor) throws UserNotFoundException;

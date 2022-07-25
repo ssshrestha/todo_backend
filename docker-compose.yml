@@ -10,32 +10,6 @@ services:
     ports:
       - 8761:8761
 
-  userauthenticaticationservice:
-   container_name: user-authentication-service
-   build: UserAuthenticationService/
-   hostname: localhost
-   restart: always
-   network_mode: host
-   depends_on:
-    - mysqlservice
-    - gatewayservice
-    - eurekaservice
-   ports:
-      - 8082:8082
-
-  usermovieservice:
-    container_name: user-movie-service
-    build: UserMovieService/
-    hostname: localhost
-    restart: always
-    network_mode: host
-    depends_on:
-      - mongodbservice
-      - gatewayservice
-      - eurekaservice
-    ports:
-      - 8085:8085
-
   gatewayservice:
     container_name: gateway-service
     build: Gateway
@@ -67,3 +41,69 @@ services:
       MYSQL_USERNAME: root
       MYSQL_PASSWORD: root
       MYSQL_ALLOW_EMPTY_PASSWORD: "YES"
+
+  userauthenticaticationservice:
+    container_name: user-authentication-service
+    build: UserAuthenticationService/
+    hostname: localhost
+    restart: always
+    network_mode: host
+    depends_on:
+      - mysqlservice
+      - gatewayservice
+      - eurekaservice
+    ports:
+      - 8082:8082
+
+  userregisterservice:
+    container_name: register
+    build: UserRegisterService/
+    hostname: localhost
+    restart: always
+    network_mode: host
+    depends_on:
+      - mongodbservice
+      - gatewayservice
+      - eurekaservice
+      - mysqlservice
+    ports:
+      - 8086:8086
+
+  taskservice:
+    container_name: task-service
+    build: TaskService/
+    hostname: localhost
+    restart: always
+    network_mode: host
+    depends_on:
+      - mongodbservice
+      - gatewayservice
+      - eurekaservice
+    ports:
+      - 8085:8085
+
+  organizationservice:
+    container_name: organization-service
+    build: OrganizationService/
+    hostname: localhost
+    restart: always
+    network_mode: host
+    depends_on:
+      - mongodbservice
+      - gatewayservice
+      - eurekaservice
+    ports:
+      - 8088:8088
+
+  archiveservice:
+    container_name: archive-service
+    build: ArchiveService/
+    hostname: localhost
+    restart: always
+    network_mode: host
+    depends_on:
+      - mongodbservice
+      - gatewayservice
+      - eurekaservice
+    ports:
+      - 8087:8087

@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -220,33 +221,32 @@ public class TaskServiceImpl implements TaskService{
     }
 
     @Override
-    public User moveTaskCompletedToArchive(String email) throws UserNotFoundException {
+    public List<Task> moveTaskCompletedToArchive(String email) throws UserNotFoundException {
         User user = taskRepo.findByEmail(email);
+        List<Task> taskList = new ArrayList<>();
         boolean taskIdIsPresent=false;
         if(user==null){
             throw new UserNotFoundException();
         } else {
             List<Task> tasks = user.getTaskList();
             LocalDate date = LocalDate.now();
-//            System.out.println("today date is : "+date);
+
             for(Task task:user.getTaskList()){
-//                System.out.println("task date is : "+task.getDate());
 
                 if(task.getDate().isBefore(date)){
                     ResponseEntity r = archiveProxy.addTask(task,email);
-                    System.out.println("value of r is : "+r);
-                    System.out.println("body of r is : "+r.getBody());
+                    taskList.add(task);
+
                 }
             }
             taskIdIsPresent = tasks.removeIf(x->x.getDate().isBefore(date));
             if(!taskIdIsPresent)
             {
-//                throw new TaskNotFoundException();
-//                System.out.println("Task not found");
             }
             user.setTaskList(tasks);
         }
-        return taskRepo.save(user);
+         taskRepo.save(user);
+        return taskList;
     }
 
     @Override
